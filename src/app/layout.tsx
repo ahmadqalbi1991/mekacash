@@ -1,15 +1,19 @@
-import '@mantine/core/styles.css';
-import '@mantine/carousel/styles.css';
+import "@mantine/core/styles.css";
+import "@mantine/carousel/styles.css";
+import "@mantine/core/styles.css";
+import "@mantine/charts/styles.css";
+import "@mantine/core/styles.css";
+import "@mantine/dates/styles.css";
 
-import {
-  MantineProvider,
-} from '@mantine/core';
+import { MantineProvider } from "@mantine/core";
 
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
-import Footer from './components/Footer';
+import Footer from "./components/Footer";
+import QueryProvider from "./providers/QueryProvider";
+import { CsrfTokenProvider } from "./providers/CsrfTokenProvide";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,27 +41,29 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <MantineProvider
-        theme={{
+          theme={{
             breakpoints: {
-              xs: '36em',
-              sm: '48em',
-              md: '62em',
-              lg: '75em',
-              xl: '88em',
-              '2xl': '96em',
-              '3xl': '108em',
-              '4xl': '120em',
-              '5xl': '137.5em',
+              xs: "36em",
+              sm: "48em",
+              md: "62em",
+              lg: "75em",
+              xl: "88em",
+              "2xl": "96em",
+              "3xl": "108em",
+              "4xl": "120em",
+              "5xl": "137.5em",
             },
           }}
-          defaultColorScheme='light'
+          defaultColorScheme="light"
         >
+          <QueryProvider>
+            <CsrfTokenProvider>
+            <Navbar />
+            <div className="mt-40">{children}</div>
 
-        <Navbar />
-        
-        {children}
-
-        <Footer />
+            <Footer />
+            </CsrfTokenProvider>
+          </QueryProvider>
         </MantineProvider>
       </body>
     </html>
