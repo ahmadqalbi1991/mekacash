@@ -3,7 +3,7 @@ import CustomLabel from "./CustomLabel";
 import clsx from "clsx";
 
 interface CustomInputProps extends TextInputProps {
-  label: string;
+  label?: string;
   labelRequired?: boolean;
   placeholder?: string;
   className?: string;
@@ -24,7 +24,7 @@ export default function CustomInput({
   return (
     <TextInput
       type={type}
-      label={<CustomLabel text={label} required={labelRequired} />}
+      label={<CustomLabel text={label || ''} required={labelRequired} />}
       placeholder={placeholder}
       className={className}
       classNames={{

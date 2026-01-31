@@ -1,6 +1,6 @@
 "use client";
 
-import { Card, Container, Grid } from "@mantine/core";
+import { Container, Grid } from "@mantine/core";
 import { ReactNode } from "react";
 import SideBar from "./components/Sidebar";
 

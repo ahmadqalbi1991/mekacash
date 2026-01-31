@@ -13,7 +13,7 @@ import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import QueryProvider from "./providers/QueryProvider";
-import { CsrfTokenProvider } from "./providers/CsrfTokenProvide";
+import { AuthProvider } from "./context/AuthContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -57,12 +57,12 @@ export default function RootLayout({
           defaultColorScheme="light"
         >
           <QueryProvider>
-            <CsrfTokenProvider>
-            <Navbar />
-            <div className="mt-40">{children}</div>
+            <AuthProvider>
+              <Navbar />
+              <div className="mt-40">{children}</div>
 
-            <Footer />
-            </CsrfTokenProvider>
+              <Footer />
+            </AuthProvider>
           </QueryProvider>
         </MantineProvider>
       </body>

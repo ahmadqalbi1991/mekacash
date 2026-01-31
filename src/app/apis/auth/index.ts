@@ -1,16 +1,16 @@
 import { useMutation, UseMutationOptions } from "@tanstack/react-query";
-import { ErrorResponse, LoginPayload, LoginResponse } from "./auth.types";
+import { ErrorResponse, LoginPayload, UserLoginResponse } from "./auth.types";
 import { createCrfToken, login } from "./authApis";
 
 export const AuthApis = {
   useLogin: (
-    options?: UseMutationOptions<LoginResponse, ErrorResponse, LoginPayload>,
+    options?: UseMutationOptions<UserLoginResponse, ErrorResponse, LoginPayload>,
   ) => {
     return useMutation({
       mutationKey: ["login"],
       mutationFn: async (payload: LoginPayload) => {
         const response = await login(payload);
-        return response as LoginResponse;
+        return response as UserLoginResponse;
       },
       ...options,
     });

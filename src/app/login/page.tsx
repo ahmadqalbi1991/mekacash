@@ -7,9 +7,11 @@ import { useRouter } from "next/navigation";
 import { useForm} from "@mantine/form"
 import { LoginPayload } from "../apis/auth/auth.types";
 import { AuthApis } from "../apis/auth";
+import { useAuth } from "../context/AuthContext";
 
 export default function Page() {
   const router = useRouter();
+  const {login} = useAuth();
 
   const form = useForm<LoginPayload>({
     mode: 'controlled',
@@ -34,8 +36,11 @@ export default function Page() {
 
   const { mutate: mutateLoginUser, isPending } = AuthApis.useLogin({
     onSuccess: async (response) => {
-      console.log(response);
-      
+      if (response?.token) {
+        localStorage.setItem('accessToken', response?.token);
+        login(response?.user);
+        router.push('/merchant/dashboard')
+      }
     },
   });
 

@@ -1,22 +1,27 @@
 "use client";
 
 import { ROUTES } from "@/utils/routes";
-import { AppShell, Button, Container, Flex, Image } from "@mantine/core";
+import { AppShell, Button, Container, Flex, Image, Menu } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import {
   IconBrandFacebook,
   IconBrandGoogle,
   IconBrandInstagram,
   IconBrandLinkedin,
+  IconLogout,
+  IconLogout2,
+  IconSettings,
 } from "@tabler/icons-react";
 import Link from "next/link";
 import CustomButton from "./Common/CustomButton";
 import { useRouter } from "next/navigation";
+import { useAuth } from "../context/AuthContext";
 
 export default function Navbar() {
   const [mobileOpened, { toggle: toggleMobile }] = useDisclosure();
   const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(true);
   const router = useRouter();
+  const auth = useAuth();
 
   return (
     <AppShell
@@ -64,16 +69,26 @@ export default function Navbar() {
                   );
                 })}
               </div>
-              <div>
+              {auth.user ? (
+                <Menu shadow="md" width={200}>
+                  <Menu.Target>
+                    <p className="cursor-pointer">{auth?.user.name}</p>
+                  </Menu.Target>
+
+                  <Menu.Dropdown>
+                    <Menu.Item onClick={() => auth.logout()} leftSection={<IconLogout2 color={'red'} size={14} />}>
+                      Logout
+                    </Menu.Item>
+                  </Menu.Dropdown>
+                </Menu>
+              ) : (
                 <CustomButton
                   radius="lg"
                   variant="outline"
                   title="Login / Signup"
-                  onClick={() => {
-                    router.push('/login');
-                  }}
+                  onClick={() => router.push("/login")}
                 />
-              </div>
+              )}
             </Flex>
           </Container>
         </div>

@@ -41,7 +41,7 @@ export async function apiClient<T>(
     const res = await fetch(url, {
       ...restOptions,
       headers,
-      credentials: 'include',
+      // credentials: 'include',
     });
 
     if (!res.ok) {
