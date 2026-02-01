@@ -1,13 +1,23 @@
 import { Select } from "@mantine/core";
 
-export default function CustomSelect({label}: {
-    label: string
-}) {
-    return (
-        <Select
+interface SelectDataInterface {
+  label: string;
+  value: string;
+}
+
+interface SelectInterface {
+  label: string;
+  data: SelectDataInterface[];
+  className: string;
+}
+
+export default function CustomSelect({ label, data, className }: SelectInterface) {
+  return (
+    <Select
       label={label}
       placeholder="Pick value"
-      data={['React', 'Angular', 'Vue', 'Svelte']}
+      data={data}
+      className={`my-3 ${className}`}
     />
-    )
+  );
 }
