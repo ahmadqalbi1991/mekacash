@@ -32,10 +32,12 @@ export async function apiClient<T>(
     headers['Content-Type'] = contentType;
   }
 
-  // if (typeof window !== 'undefined') {
-  //   const token = localStorage.getItem('accessToken');
-  //   if (token) headers['Authorization'] = `Bearer ${token}`;
-  // }
+  headers['X-SECRET-KEY'] = process.env.NEXT_PUBLIC_API_KEY || ''
+
+  if (typeof window !== 'undefined') {
+    const token = localStorage.getItem('accessToken');
+    if (token) headers['Authorization'] = `Bearer ${token}`;
+  }
 
   try {
     const res = await fetch(url, {
@@ -47,10 +49,7 @@ export async function apiClient<T>(
     if (!res.ok) {
       const status = res.status;
       const errorBody = await res.json().catch(() => ({}));
-      const message = errorBody.message || 'Something went wrong';
-
-      console.log(status);
-      
+      const message = errorBody.message || 'Something went wrong';      
 
       switch (status) {
         case 401:

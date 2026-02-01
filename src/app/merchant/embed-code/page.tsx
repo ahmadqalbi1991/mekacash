@@ -25,27 +25,28 @@ export default function EmbedCodeCard() {
   };
 
   return (
-    <Card shadow="sm" padding="lg" radius="md" className="w-full max-w-4xl mx-auto">
-      <Text size="lg" mb="md">
-        Embed Your Widget
-      </Text>
+    <>
+      <h3 className="text-[20px] font-[700] mb-2">Embed your widget</h3>
 
-      <Flex justify="center" align="center">
-        <CustomInput
-          value={iframeCode}
-          readOnly
-          className="w-full"
-        />
-      </Flex>
+      <Card
+        shadow="sm"
+        padding="lg"
+        radius="md"
+        className="w-full max-w-4xl mx-auto"
+      >
+        <Flex justify="center" align="center">
+          <CustomInput value={iframeCode} readOnly className="w-full" />
+        </Flex>
 
-      <Flex justify="center" mt="md">
-        <CustomButton
-          title={copied ? "Copied!" : "Copy Code"}
-          radius="xl"
-          variant="outline"
-          onClick={copyToClipboard}
-        />
-      </Flex>
-    </Card>
+        <Flex justify="center" mt="md">
+          <CustomButton
+            title={copied ? "Copied!" : "Copy Code"}
+            radius="xl"
+            variant="outline"
+            onClick={copyToClipboard}
+          />
+        </Flex>
+      </Card>
+    </>
   );
 }

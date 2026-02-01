@@ -77,6 +77,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     await fetch('/api/auth/remove-cookie', {
       method: 'POST',
     });
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('user');
 
     // Set user to null immediately
     setUser(null);
