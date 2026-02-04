@@ -9,8 +9,6 @@ export function middleware(req: NextRequest) {
   // Get all cookies for debugging
   const allCookies = req.cookies.getAll();
   const token = req.cookies.get('accessToken')?.value;
-
-  console.log(token);
   
   
   // Also try getting cookie from headers (alternative method)
@@ -63,6 +61,7 @@ export const config = {
     '/login',
     '/merchant/dashboard',
     '/merchant/embed-code',
-    '/merchant/api-keys'
+    '/merchant/api-keys',
+    '/merchant/payment-link'
   ],
 };

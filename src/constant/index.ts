@@ -3,4 +3,5 @@ export const PROTECTED_ROUTES = [
   '/merchant/dashboard',
   '/merchant/embed-code',
   '/merchant/api-keys',
+  '/merchant/payment-link',
 ] as const;
